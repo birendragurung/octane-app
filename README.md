@@ -56,3 +56,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+```
+k6 run -e TYPE=fpm -e RESOURCE=hello ./k6/k6.js
+k6 run -e TYPE=octane -e RESOURCE=hello ./k6/k6.js
+
+k6 run -e TYPE=fpm -e RESOURCE=users ./k6/k6.js
+k6 run -e TYPE=octane -e RESOURCE=users ./k6/k6.js
+
+```
+
+```
+brew install go
+go install go.k6.io/xk6/cmd/xk6@latest
+echo 'export PATH="$PATH:$(go env GOPATH)/bin"' >> ~/.zshrc
+source ~/.zshrc
+xk6 build --with github.com/grafana/xk6-sql -o k6-custom
+
+```
+
+

@@ -11,6 +11,8 @@
     "sail": false,
     "skills": [
         "laravel-best-practices",
+        "pulse-development",
+        "livewire-development",
         "pest-testing",
         "tailwindcss-development"
     ]

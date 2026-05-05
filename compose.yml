@@ -1,10 +1,14 @@
 # compose.yaml
 services:
-  frankenphp:
-    build:
-      context: .
-    entrypoint: php artisan octane:frankenphp --workers=1 --max-requests=1
-    ports:
-      - "8000:8000"
+  database:
+    image: mysql:8.0.37
+    container_name: "octane-app-database"
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - .:/app
+      - ./.data/database:/var/lib/mysql:rw
+    ports:
+      - '3308:3306'
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=octane_app
+      - MYSQL_ROOT_PASSWORD=password

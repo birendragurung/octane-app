@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Collection;
 use Laravel\Octane\Contracts\OperationTerminated;
 use Laravel\Octane\Events\RequestHandled;
 use Laravel\Octane\Events\RequestReceived;
@@ -132,6 +134,8 @@ return [
 
     'warm' => [
         ...Octane::defaultServicesToWarm(),
+        Collection::class,
+        CarbonImmutable::class,
     ],
 
     'flush' => [

@@ -96,8 +96,10 @@ class StatsController extends Controller
         $octaneMemory = (float) shell_exec("ps aux | grep 'frankenphp' | grep -v grep | awk '{sum += $6} END {print sum / 1024}'");
         $load = (int) (sys_getloadavg()[0] * 100);
 
-        Pulse::record('fpm_process_memory', 'k6_report', (int) $fpmMemory)->max();
-        Pulse::record('octane_process_memory', 'k6_report', (int) $octaneMemory)->max();
+        $engine === 'fpm' ?
+            Pulse::record('fpm_process_memory', 'k6_report', (int) $fpmMemory)->max()
+            : Pulse::record('octane_process_memory', 'k6_report', (int) $octaneMemory)->max();
+
         Pulse::record('system_load', 'k6_report', $load)->avg();
 
         return response()->json(['status' => 'metrics_stored', 'engine' => $engine]);

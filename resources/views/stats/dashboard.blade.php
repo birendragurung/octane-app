@@ -29,9 +29,9 @@
             </div>
             <div class="flex gap-2">
                 <a href="/stats/hello-fpm" class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ $route === '/hello-fpm' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5' }}">Hello FPM</a>
+                <a href="/stats/hello-octane" class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ $route === '/hello-octane' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5' }}">Hello Octane</a>
                 <a href="/stats/users-fpm" class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ $route === '/users-fpm' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5' }}">Users FPM</a>
                 <a href="/stats/users-octane" class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ $route === '/users-octane' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5' }}">Users Octane</a>
-                <a href="/stats/hello-octane" class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ $route === '/hello-octane' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5' }}">Hello Octane</a>
             </div>
         </header>
 
@@ -62,7 +62,7 @@
                 </div>
                 <h3 class="text-slate-400 text-sm font-semibold mb-1">Failed Requests</h3>
                 <div class="flex items-baseline gap-2">
-                    <p class="text-4xl font-bold tracking-tight {{ $failed_requests > 0 ? 'text-rose-400' : '' }}">{{ number_format($failed_requests) }}</p>
+                    <p class="text-4xl font-bold tracking-tight {{ $failed_requests > 0 ? 'text-rose-400' : '' }}">{{ number_format($failed_requests + $system['connection_errors']) }}</p>
                     <span class="text-rose-500 text-xs font-bold">fails</span>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <h3 class="text-slate-400 text-sm font-semibold mb-1">Success Rate</h3>
                 <div class="flex items-baseline gap-2">
                     <p class="text-4xl font-bold tracking-tight text-emerald-400">
-                        {{ $total_requests > 0 ? round((($total_requests - $failed_requests) / $total_requests) * 100, 1) : 100 }}%
+                        {{ $total_requests > 0 ? round((($system['total_requests'] - $system['connection_errors']) / $system['total_requests'] ) * 100, 1) : 0 }}%
                     </p>
                 </div>
             </div>

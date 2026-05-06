@@ -3,9 +3,9 @@ import { check } from 'k6';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.2/index.js';
 
 export const options = {
-    vus: 3000,
-    duration: '30s',
-    // iterations: 10000,
+    vus: 300,
+    // duration: '30s',
+    iterations: 50000,
 };
 
 // Parameters:
